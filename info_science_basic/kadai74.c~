@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct lnode {
+    int data;
+    struct lnode *next;
+} *List;
+ 
+List stack_push(List, int){
+  
+int stack_read(List);
+List stack_pop(List);
+List calc_add(List);
+List calc_sub(List);
+List calc_mul(List);
+
+
+int main{
+  char *s;
+  List l;
+  l = (struct lnode *)malloc(sizeof(struct lnode));
+  while (scanf("%99s", s) != EOF){
+    if (*s == '=') { printf("%d", stack_read(l)); break;}
+    else if (*s == '+')  calc_add(l);
+  else if (*s == '-') calc_sub(l);
+  else if (*s == '*') calc_mul(l);
+  else if (*s == '0') stack-push(l, 0);
+  else if (atoi(s) != 0) stack-push(l, atoi(s));
+  else puts("unknown command");
+  }
+  if (*s != '=')
+    printf("%d", stack_read(l));
+  return 0;
+}

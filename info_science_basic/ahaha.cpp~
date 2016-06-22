@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+  int a = 1;
+  int* b = &a;
+  int** c = &b;
+  int* const * d = c;
+  const int * const * e = d;
+  int const * const * f = e;
+  int const ** const g = f;
+  return 0;
+}

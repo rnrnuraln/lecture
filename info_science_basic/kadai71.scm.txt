@@ -1,0 +1,6 @@
+(define (little l x) (if (equal? l '()) '() (if (< (car l) x) (cons (car l) (little (cdr l) x)) (little (cdr l) x)))))
+
+(define (big l x) (if (equal? l '() '() (if (< (car l) x) (big (cdr l) x) (cons (car l) (big (cdr l) x)))))
+
+(define (ki l) (if (equal? l '()) '() (if (= 1 (length l)) l 
+(let ((a (list (little l (car l))) (b (list (big l (car l))))) (append (ki a) (ki b)))))
