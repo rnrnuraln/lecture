@@ -18,12 +18,14 @@ class Automaton(fileName: String) {
       if (descriptionStarted) {
         if ((l.trim.startsWith("node")) && (l.contains("doublecircle"))) {
           //then there will be the information on the terminal
-          val s = l.split(";")
+          val s = l.split("]")
           if (s.length > 1) {
             val aho = s(1).trim.split(" ")
             for (nodeName <- aho) {
-              nodes = nodes.updated(nodeName, new Anode(nodeName))
-              nodes(nodeName).ifTerminal = true
+                if (nodeName != ";") {
+                nodes = nodes.updated(nodeName, new Anode(nodeName))
+                nodes(nodeName).ifTerminal = true
+	      }
             }
           }
         } else if (l.contains("->") && (l.trim.split("->")(0).startsWith("start"))) {
@@ -45,7 +47,7 @@ class Automaton(fileName: String) {
             case None => nodes = nodes.updated(nodeName, new Anode(nodeName))
           }
           if (edges.length != 1) {
-	    //行き先のノードについてと、エッジとについての処理
+            //行き先のノードについてと、エッジとについての処理
             val lnext = edges(1).split("\\[")
             val nextAnodeName = lnext(0).trim
             val edgeName = lnext(1).split("\"")(1)
@@ -67,6 +69,7 @@ class Automaton(fileName: String) {
     for (nodeName <- starts) {
       nodes(nodeName._1).checkIfReachable
     }
+    val ahe = nodes.filter(x => x._2.ifReachable)
     terminals.filter(x => x._2.ifReachable)
   }
 
@@ -76,7 +79,7 @@ class Automaton(fileName: String) {
       if (node.findSelfPath) {
         true
       } else if (it.hasNext) {
-        nodes.foreach(x => x._2.ifSearched = true)
+        nodes.foreach(x => x._2.ifSearched = false)
         emptinessCheckSub(it)
       } else false
     }
