@@ -55,12 +55,7 @@ object Kadai {
   }
 }
 
-class Kadai(nn: Int, retryNumm: Int, adaptationn: Double, convergencyy: Double, errorNormm: Double) {
+class Kadai(val n: Int, val retryNum: Int, val adaptation: Double, val convergency: Double, val errorNorm: Double) {
   //各精度における検査項目をここに記す
   //Solverはメモリを取るからな……
-  val n = nn
-  val retryNum = retryNumm
-  val adaptation = adaptationn
-  val convergency = convergencyy
-  val errorNorm = errorNormm
 }
